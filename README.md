@@ -23,10 +23,16 @@ This is a simple blog application built with a fullstack server using **Express*
   - Vite
 
 
-### Install deps:
-cd client
-npm install
-cd .. 
+###  Install Dependencies
+
+To install the dependencies for both the frontend and backend, follow these steps:
+
+1. Navigate to the `client` folder and install frontend dependencies:
+   ```bash
+   cd client
+   npm install
+   cd ..
+   
 cd server
 npm install
 cd .. 
