@@ -1,0 +1,126 @@
+openapi: 3.0.0
+info:
+  title: Personal Blog API
+  version: 1.0.0
+  description: API documentation for the Personal Blog platform
+servers:
+  - url: '{PORT}/api'
+    description: The base URL for the Personal Blog API
+    variables:
+      PORT:
+        default: 'http://localhost:5001'
+        description: The environment variable for the server URL
+
+paths:
+  /articles:
+    get:
+      summary: Get all articles
+      responses:
+        '200':
+          description: A list of articles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Article'
+        '500':
+          description: Internal server error
+    post:
+      summary: Create a new article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Article'
+      responses:
+        '201':
+          description: The article was successfully created
+        '400':
+          description: Bad request
+
+  /articles/{id}:
+    get:
+      summary: Get an article by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the article
+      responses:
+        '200':
+          description: A single article
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+        '404':
+          description: Article not found
+    put:
+      summary: Update an article by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Article'
+      responses:
+        '200':
+          description: The article was successfully updated
+        '404':
+          description: Article not found
+        '400':
+          description: Bad request
+    delete:
+      summary: Delete an article by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the article
+      responses:
+        '200':
+          description: Article successfully deleted
+        '404':
+          description: Article not found
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    Article:
+      type: object
+      required:
+        - title
+        - content
+        - author
+      properties:
+        id:
+          type: string
+          description: The auto-generated ID of the article
+        title:
+          type: string
+          description: The title of the article
+        content:
+          type: string
+          description: The content of the article
+        author:
+          type: string
+          description: The author of the article
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags associated with the article
+      example:
+        id: 60b8d295f06070e8c846cd35
+        title: "How to write documentation for APIs"
+        content: "This is a detailed guide on writing API documentation..."
+        author: "John Doe"
+        tags: ["API", "Documentation", "Guide"]
