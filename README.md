@@ -32,12 +32,12 @@ To install the dependencies for both the frontend and backend, follow these step
    cd client
    npm install
    cd ..
-   
-cd server
-npm install
-cd .. 
-npm install
+   cd server
+   npm install
+   cd .. 
+   npm install
 
 ### Start project:
-npm run start
+  ```bash
+  npm run start
 
